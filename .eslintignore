@@ -1,0 +1,5 @@
+**/node_modules/*
+index.ts
+commitlint.config.js
+next.config.js
+next-env.d.ts
