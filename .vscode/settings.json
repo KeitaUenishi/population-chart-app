@@ -1,0 +1,8 @@
+{
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": ["source.addMissingImports", "source.fixAll.eslint"],
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "cSpell.words": ["Kiroku", "Kirokus", "Maypage", "Postgrest"],
+  "typescript.tsdk": "node_modules/typescript/lib"
+}
