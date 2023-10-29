@@ -1,4 +1,4 @@
-const { ESLint } = require('eslint');
+const { ESLint } = require("eslint");
 
 const removeIgnoredFiles = async (files) => {
   const eslint = new ESLint();
@@ -8,11 +8,11 @@ const removeIgnoredFiles = async (files) => {
     }),
   );
   const filteredFiles = files.filter((_, i) => !isIgnored[i]);
-  return filteredFiles.join(' ');
+  return filteredFiles.join(" ");
 };
 
 module.exports = {
-  '**/*.{ts,tsx,js,jsx}': async (files) => {
+  "**/*.{ts,tsx,js,jsx}": async (files) => {
     const filesToLint = await removeIgnoredFiles(files);
     return [`eslint --max-warnings=0 ${filesToLint}`];
   },
