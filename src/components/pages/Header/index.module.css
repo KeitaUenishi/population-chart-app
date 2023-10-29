@@ -1,0 +1,21 @@
+.header {
+  position: sticky;
+  width: 100%;
+  z-index: 1000;
+}
+
+.container {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  padding: 8px;
+}
+
+.siteTitle {
+  font-size: 24px;
+  font-weight: 700;
+  color: #000;
+  text-decoration: none;
+}
