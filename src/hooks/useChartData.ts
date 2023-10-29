@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+import { chartPrefColors } from "@/constants";
 import { randomColorString } from "@/lib/util";
 import { Dataset, Population, Prefectures } from "@/types";
 
@@ -11,7 +12,6 @@ export const useChartDataPreparation = (
   prefectures: Prefectures,
   checkedItems: Record<string, boolean>,
   populationData: { data: Population; id: number }[],
-  selectPrefId: string,
 ) => {
   const [populationState, setPopulationState] = useState<ChartDataset>();
 
@@ -38,7 +38,7 @@ export const useChartDataPreparation = (
     data.populationData?.map((d) => {
       d.data.map((v) => yearLabels.add(v.year.toString()));
 
-      const color = randomColorString();
+      const color = chartPrefColors.find((c) => c.name === data.prefName)?.color || randomColorString();
       const dataset = {
         backgroundColor: color,
         borderColor: color,

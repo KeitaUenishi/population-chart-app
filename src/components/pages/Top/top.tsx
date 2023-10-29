@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import dynamic from "next/dynamic";
 
+import { PrefecturesSelectForm } from "@/components/model/prefecture/PrefectureSelectForm";
+import { PopulationTypeSelectForm } from "@/components/model/population/PopulationType";
 import styles from "@/components/pages/Top/top.module.css";
-import { CheckBox } from "@/components/ui/checkbox";
-import api from "@/lib/api";
 import { useChartDataPreparation } from "@/hooks/useChartData";
-import { Population, Prefectures } from "@/types";
+import { Prefectures } from "@/types";
 import { chartTitle } from "@/constants";
+import { populationActions, populationGetters } from "@/store/population";
 
 const LineChartUi = dynamic(() => import("@/components/ui/chart/lineChart"), { ssr: false });
 
@@ -15,27 +16,25 @@ type Props = {
 };
 
 export const Top: React.FC<Props> = ({ prefectures }) => {
+  const populationState = populationGetters.usePopulation();
+  const { fetchPopulation } = populationActions.useFetchPopulation();
+  const { removePopulation } = populationActions.useRemovePopulation();
+
   const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>({});
-  const [selectPrefId, setSelectPrefId] = useState<string>("");
-  const [populationState, setPopulationState] = useState<{ data: Population; id: number }[]>([]);
   const [selectChartType, setSelectChartType] = useState<string>(chartTitle[0].type);
-  const { population, yearLabels } = useChartDataPreparation(prefectures, checkedItems, populationState, selectPrefId);
+  const { population, yearLabels } = useChartDataPreparation(prefectures, checkedItems, populationState);
 
   const handleChecked = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const { checked, value } = e.target;
 
     if (checked) {
-      const data = await api.get(`/api/population/?prefCode=${value}`);
-      const populationData = [...populationState, { data: data, id: Number(value) }];
-      setPopulationState(populationData);
+      fetchPopulation(value);
       setCheckedItems({
         ...checkedItems,
         [value]: checked,
       });
-      setSelectPrefId(value);
     } else {
-      const removePopulation = populationState.filter((item) => item.id !== Number(value));
-      setPopulationState(removePopulation);
+      removePopulation(value);
       delete checkedItems[value];
       setCheckedItems({ ...checkedItems });
     }
@@ -43,40 +42,15 @@ export const Top: React.FC<Props> = ({ prefectures }) => {
 
   return (
     <div className={styles.container}>
-      <h1>都道府県</h1>
-      <div className={styles.prefectures}>
-        {prefectures.result.map((prefecture) => {
-          const { prefCode, prefName } = prefecture;
-          return (
-            <div key={prefCode}>
-              <CheckBox
-                checked={checkedItems[prefCode.toString()] || false}
-                id={prefCode.toString()}
-                label={prefName}
-                value={prefCode.toString()}
-                onChange={handleChecked}
-              />
-            </div>
-          );
-        })}
-      </div>
+      <PrefecturesSelectForm
+        checkedItems={checkedItems}
+        handleChecked={handleChecked}
+        prefectures={prefectures}
+        setCheckedItems={setCheckedItems}
+      />
       <div className={styles.chartContainer}>
         <div className={styles.selectContainer}>
-          <h2>表示データ選択</h2>
-          <select
-            className={styles.select}
-            onChange={(e) => {
-              setSelectChartType(() => e.target.value);
-            }}
-          >
-            {chartTitle.map((item) => {
-              return (
-                <option key={item.type} value={item.type}>
-                  {item.title}
-                </option>
-              );
-            })}
-          </select>
+          <PopulationTypeSelectForm setSelectChartType={setSelectChartType} />
         </div>
         <div className={styles.chart}>
           <LineChartUi chartType={selectChartType} population={population} yearLabels={yearLabels} />
