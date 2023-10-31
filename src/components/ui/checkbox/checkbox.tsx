@@ -10,7 +10,7 @@ type Props = {
 
 export const CheckBox: React.FC<Props> = ({ checked, id, label, onChange, value }) => {
   return (
-    <>
+    <li className={styles.li}>
       <label className={styles.label}>
         <input
           checked={checked}
@@ -23,6 +23,6 @@ export const CheckBox: React.FC<Props> = ({ checked, id, label, onChange, value 
         />
         <span className={styles.text}>{label}</span>
       </label>
-    </>
+    </li>
   );
 };

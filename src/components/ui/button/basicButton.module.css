@@ -1,7 +1,7 @@
 .basicButton {
   background-color: #fff;
   border: 1px solid #000;
-  border-radius: 5px;
+  border-radius: var(--border-radius);
   color: #000;
   cursor: pointer;
   font-size: 1rem;

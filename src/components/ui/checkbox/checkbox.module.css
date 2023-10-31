@@ -1,3 +1,7 @@
+.li {
+  list-style-type: none;
+}
+
 .label {
   margin-left: 16px;
   padding: 12px 8px;
@@ -29,4 +33,15 @@
   margin-left: 16px;
   font-size: 24px;
   line-height: 24px;
+}
+
+@media screen and (max-width: 576px) {
+  .input {
+    width: 16px;
+    height: 16px;
+  }
+  .text {
+    margin-left: 8px;
+    font-size: 16px;
+  }
 }

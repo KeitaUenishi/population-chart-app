@@ -37,17 +37,19 @@ export const PrefecturesSelectForm: React.FC<Props> = ({
   };
 
   return (
-    <>
-      <h1>都道府県を選択してください</h1>
-      <div className={styles.buttonContainer}>
-        <BasicButton colorScheme="primary" text="全て選択" onClick={() => handleAllSelect()} />
-        <BasicButton colorScheme="secondary" text="クリア" onClick={() => handleAllClear()} />
+    <section>
+      <div className={styles.descriptionContainer}>
+        <h1>都道府県を選択してください</h1>
+        <span className={styles.buttonContainer}>
+          <BasicButton colorScheme="primary" text="全て選択" onClick={() => handleAllSelect()} />
+          <BasicButton colorScheme="secondary" text="クリア" onClick={() => handleAllClear()} />
+        </span>
       </div>
       <div className={styles.prefectures}>
         {prefectures.result.map((prefecture) => {
           const { prefCode, prefName } = prefecture;
           return (
-            <div key={prefCode}>
+            <ul key={prefCode}>
               <CheckBox
                 checked={checkedItems[prefCode.toString()] || false}
                 id={prefCode.toString()}
@@ -55,10 +57,10 @@ export const PrefecturesSelectForm: React.FC<Props> = ({
                 value={prefCode.toString()}
                 onChange={handleChecked}
               />
-            </div>
+            </ul>
           );
         })}
       </div>
-    </>
+    </section>
   );
 };

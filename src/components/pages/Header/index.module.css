@@ -9,13 +9,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #fff;
+  background-color: var(--header-background-color);
   padding: 8px;
 }
 
 .siteTitle {
   font-size: 24px;
   font-weight: 700;
-  color: #000;
+  color: var(--header-text-color);
   text-decoration: none;
 }
