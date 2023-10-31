@@ -8,7 +8,7 @@ export const Header = () => {
     <header className={styles.header}>
       <div className={styles.container}>
         <NextLink className={styles.siteTitle} href="/">
-          App
+          都道府県別人口推移グラフ
         </NextLink>
       </div>
     </header>

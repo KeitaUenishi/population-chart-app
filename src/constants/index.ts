@@ -4,14 +4,19 @@ export const apiPath = {
     prefectures: "/api/v1/prefectures",
   },
   resusEndpoint: "https://opendata.resas-portal.go.jp",
-};
+} as const;
 
 export const chartTitle = [
   { title: "総人口", type: "general" },
   { title: "年少人口", type: "young" },
   { title: "生産年齢人口", type: "productive" },
   { title: "老年人口", type: "elderly" },
-];
+] as const;
+
+export const breakPoints = {
+  tablet: 768,
+  smartPhone: 576,
+} as const;
 
 export const chartPrefColors = [
   { name: "北海道", color: "#FF0000" },
@@ -61,4 +66,4 @@ export const chartPrefColors = [
   { name: "宮崎県", color: "#4CB944" },
   { name: "鹿児島県", color: "#577590" },
   { name: "沖縄県", color: "#D3423E" },
-];
+] as const;
