@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction } from "react";
 
 import styles from "@/components/model/prefecture/PrefectureSelectForm/index.module.css";
-import { CheckBox } from "@/components/ui/checkbox";
 import { BasicButton } from "@/components/ui/button/basicButton";
+import { CheckBox } from "@/components/ui/checkbox";
 import { populationActions } from "@/store/population";
 import { Prefectures } from "@/types";
 
