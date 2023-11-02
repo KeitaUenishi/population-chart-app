@@ -1,5 +1,3 @@
-import React, { useEffect } from "react";
-
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -10,10 +8,11 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import React, { useEffect } from "react";
 import { Line } from "react-chartjs-2";
 
-import { breakPoints, chartTitle } from "@/constants";
 import styles from "@/components/ui/chart/lineChart.module.css";
+import { breakPoints, chartTitle } from "@/constants";
 import { Dataset } from "@/types";
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
@@ -23,6 +22,8 @@ type ChartItem = {
   population: { [key: string]: Dataset[] };
   yearLabels: Set<string>;
 };
+
+console.log("");
 
 const LineChartUi = ({ chartType, population, yearLabels }: ChartItem) => {
   const [windowWidth, setWindowWidth] = React.useState<number>(window.innerWidth);

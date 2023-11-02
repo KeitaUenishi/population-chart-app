@@ -1,13 +1,13 @@
-import React, { useState } from "react";
 import dynamic from "next/dynamic";
+import React, { useState } from "react";
 
-import { PrefecturesSelectForm } from "@/components/model/prefecture/PrefectureSelectForm";
 import { PopulationTypeSelectForm } from "@/components/model/population/PopulationType";
+import { PrefecturesSelectForm } from "@/components/model/prefecture/PrefectureSelectForm";
 import styles from "@/components/pages/Top/top.module.css";
-import { useChartDataPreparation } from "@/hooks/useChartData";
-import { Prefectures } from "@/types";
 import { chartTitle } from "@/constants";
+import { useChartDataPreparation } from "@/hooks/useChartData";
 import { populationActions, populationGetters } from "@/store/population";
+import { Prefectures } from "@/types";
 
 const LineChartUi = dynamic(() => import("@/components/ui/chart/lineChart"), { ssr: false });
 
@@ -15,6 +15,7 @@ type Props = {
   prefectures: Prefectures;
 };
 
+console.log("");
 export const Top: React.FC<Props> = ({ prefectures }) => {
   const populationState = populationGetters.usePopulation();
   const { fetchPopulation } = populationActions.useFetchPopulation();
