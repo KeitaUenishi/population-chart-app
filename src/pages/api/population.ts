@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
-import api from "@/lib/api";
 import { apiPath } from "@/constants";
+import api from "@/lib/api";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const reqPath = `${apiPath.resusEndpoint}${apiPath.resusApi.population}?prefCode=${req.query.prefCode}`;
