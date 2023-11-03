@@ -9,13 +9,12 @@ import { useChartDataPreparation } from "@/hooks/useChartData";
 import { populationActions, populationGetters } from "@/store/population";
 import { Prefectures } from "@/types";
 
-const LineChartUi = dynamic(() => import("@/components/ui/chart/lineChart"), { ssr: false });
+const PopulationChart = dynamic(() => import("@/components/model/population/PopulationChart"), { ssr: false });
 
 type Props = {
   prefectures: Prefectures;
 };
 
-console.log("");
 export const Top: React.FC<Props> = ({ prefectures }) => {
   const populationState = populationGetters.usePopulation();
   const { fetchPopulation } = populationActions.useFetchPopulation();
@@ -43,20 +42,24 @@ export const Top: React.FC<Props> = ({ prefectures }) => {
 
   return (
     <div className={styles.container}>
-      <PrefecturesSelectForm
-        checkedItems={checkedItems}
-        handleChecked={handleChecked}
-        prefectures={prefectures}
-        setCheckedItems={setCheckedItems}
-      />
-      <div className={styles.chartContainer}>
-        <div className={styles.selectContainer}>
-          <PopulationTypeSelectForm setSelectChartType={setSelectChartType} />
+      <section aria-label="都道府県の選択エリア">
+        <PrefecturesSelectForm
+          checkedItems={checkedItems}
+          handleChecked={handleChecked}
+          prefectures={prefectures}
+          setCheckedItems={setCheckedItems}
+        />
+      </section>
+      <section aria-label="人口データのグラフ表示エリア">
+        <div className={styles.chartContainer}>
+          <div className={styles.selectContainer}>
+            <PopulationTypeSelectForm setSelectChartType={setSelectChartType} />
+          </div>
+          <div className={styles.chart}>
+            <PopulationChart chartType={selectChartType} population={population} yearLabels={yearLabels} />
+          </div>
         </div>
-        <div className={styles.chart}>
-          <LineChartUi chartType={selectChartType} population={population} yearLabels={yearLabels} />
-        </div>
-      </div>
+      </section>
     </div>
   );
 };

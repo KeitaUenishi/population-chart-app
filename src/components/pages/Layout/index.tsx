@@ -12,10 +12,8 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <>
       <MetaTag />
-      <div className={styles.container}>
-        <Header />
-        <div className={styles.content}>{children}</div>
-      </div>
+      <Header />
+      <main className={styles.container}>{children}</main>
     </>
   );
 };
