@@ -37,7 +37,7 @@ export const PrefecturesSelectForm: React.FC<Props> = ({
   };
 
   return (
-    <section>
+    <>
       <div className={styles.descriptionContainer}>
         <h1>都道府県を選択してください</h1>
         <span className={styles.buttonContainer}>
@@ -61,6 +61,6 @@ export const PrefecturesSelectForm: React.FC<Props> = ({
           );
         })}
       </div>
-    </section>
+    </>
   );
 };
