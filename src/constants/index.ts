@@ -1,9 +1,9 @@
 export const apiPath = {
-  resusApi: {
+  resasApi: {
     population: "/api/v1/population/composition/perYear",
     prefectures: "/api/v1/prefectures",
   },
-  resusEndpoint: "https://opendata.resas-portal.go.jp",
+  resasEndpoint: "https://opendata.resas-portal.go.jp",
 } as const;
 
 export const chartTitle = [

@@ -3,6 +3,6 @@
   "editor.codeActionsOnSave": ["source.addMissingImports", "source.fixAll.eslint"],
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "typescript.preferences.importModuleSpecifier": "non-relative",
-  "cSpell.words": ["Kiroku", "Kirokus", "Maypage", "Postgrest"],
+  "cSpell.words": ["resas", "RESAS"],
   "typescript.tsdk": "node_modules/typescript/lib"
 }
