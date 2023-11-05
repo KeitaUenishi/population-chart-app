@@ -14,7 +14,7 @@ export const PopulationTypeSelectForm: React.FC<Props> = memo(({ setSelectChartT
       <select
         className={styles.select}
         onChange={(e) => {
-          setSelectChartType(() => e.target.value);
+          setSelectChartType(e.target.value);
         }}
       >
         {chartTitle.map((item) => {

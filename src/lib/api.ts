@@ -1,3 +1,5 @@
+import { ApiError } from "@/types";
+
 const api = {
   get: async (url: string, header?: { [key: string]: string }) => {
     const response = await fetch(url, {
@@ -8,8 +10,8 @@ const api = {
       method: "GET",
     });
     if (!response.ok) {
-      const err = await response.json();
-      throw new Error(err);
+      const err: ApiError = await response.json();
+      throw new Error(err.message);
     }
     return await response.json();
   },
