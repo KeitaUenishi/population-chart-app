@@ -10,7 +10,8 @@
     "lint:fix": "eslint src/**/*.{ts,tsx} --fix",
     "format": "prettier --write .",
     "prepare": "husky install",
-    "test": "jest --watch",
+    "test": "jest",
+    "test:w": "jest --watch",
     "test:ci": "jest --ci"
   },
   "dependencies": {
