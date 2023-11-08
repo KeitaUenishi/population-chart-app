@@ -26,3 +26,7 @@ export type Dataset = {
   data: number[];
   label: string;
 };
+
+export type ApiError = {
+  message: string;
+};

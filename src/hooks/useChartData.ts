@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-
 import { chartPrefColors } from "@/constants";
 import { randomColorString } from "@/lib/util";
 import { Dataset, Population, Prefectures } from "@/types";
@@ -11,10 +9,8 @@ type ChartDataset = {
 export const useChartDataPreparation = (
   prefectures: Prefectures,
   checkedItems: Record<string, boolean>,
-  populationData: { data: Population; id: number }[],
+  populationState: { data: Population; id: number }[],
 ) => {
-  const [populationState, setPopulationState] = useState<ChartDataset>();
-
   const population: ChartDataset = {
     elderly: [],
     general: [],
@@ -26,7 +22,7 @@ export const useChartDataPreparation = (
   const selectPref = prefResult.filter((pref) => checkedItems[pref.prefCode]);
 
   const selectData = selectPref.map((pref) => {
-    const selectPrefPopulation = populationData.find((d) => pref.prefCode === d.id);
+    const selectPrefPopulation = populationState.find((d) => pref.prefCode === d.id);
     const data = selectPrefPopulation?.data.result.data;
     return {
       populationData: data,
@@ -64,9 +60,6 @@ export const useChartDataPreparation = (
       }
     });
   });
-  useEffect(() => {
-    setPopulationState({ ...populationState, ...population });
-  }, [checkedItems]);
 
   return { population, yearLabels };
 };

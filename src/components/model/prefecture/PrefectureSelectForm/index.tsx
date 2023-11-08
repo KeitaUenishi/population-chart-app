@@ -20,7 +20,13 @@ export const PrefecturesSelectForm: React.FC<Props> = ({
   setCheckedItems,
 }) => {
   const { fetchAllPopulation } = populationActions.useFetchPopulation();
-  const handleAllSelect = () => {
+  const handleAllSelect = async () => {
+    try {
+      await fetchAllPopulation(prefectures);
+    } catch (error) {
+      alert(error);
+      return;
+    }
     const allChecked = prefectures.result.reduce(
       (acc, cur) => {
         acc[cur.prefCode] = true;
@@ -29,7 +35,6 @@ export const PrefecturesSelectForm: React.FC<Props> = ({
       {} as Record<string, boolean>,
     );
     setCheckedItems(allChecked);
-    fetchAllPopulation(prefectures);
   };
 
   const handleAllClear = () => {

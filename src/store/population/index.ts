@@ -12,8 +12,8 @@ type PopulationGetters = {
 
 type PopulationActions = {
   useFetchPopulation: () => {
-    fetchPopulation: (prefCode: string) => void;
-    fetchAllPopulation: (prefectures: Prefectures) => void;
+    fetchPopulation: (prefCode: string) => Promise<void>;
+    fetchAllPopulation: (prefectures: Prefectures) => Promise<void>;
   };
   useRemovePopulation: () => {
     removePopulation: (prefCode: string) => void;
@@ -56,6 +56,7 @@ const useFetchPopulation = () => {
           });
         }),
       );
+
       setState(() => {
         return data;
       });

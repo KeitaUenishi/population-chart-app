@@ -28,11 +28,15 @@ export const Top: React.FC<Props> = ({ prefectures }) => {
     const { checked, value } = e.target;
 
     if (checked) {
-      fetchPopulation(value);
-      setCheckedItems({
-        ...checkedItems,
-        [value]: checked,
-      });
+      try {
+        await fetchPopulation(value);
+        setCheckedItems({
+          ...checkedItems,
+          [value]: checked,
+        });
+      } catch (error) {
+        alert(error);
+      }
     } else {
       removePopulation(value);
       delete checkedItems[value];
