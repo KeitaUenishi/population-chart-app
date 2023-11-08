@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 
 import styles from "@/components/model/prefecture/PrefectureSelectForm/index.module.css";
 import { BasicButton } from "@/components/ui/button/basicButton";
@@ -20,13 +20,16 @@ export const PrefecturesSelectForm: React.FC<Props> = ({
   setCheckedItems,
 }) => {
   const { fetchAllPopulation } = populationActions.useFetchPopulation();
+  const [isAllSelect, setIsAllSelect] = useState<boolean>(false);
+
   const handleAllSelect = async () => {
-    try {
-      await fetchAllPopulation(prefectures);
-    } catch (error) {
-      alert(error);
+    const allPrefectureCount = 47;
+    const selectPref = Object.keys(checkedItems).length;
+
+    if (allPrefectureCount === selectPref) {
       return;
     }
+
     const allChecked = prefectures.result.reduce(
       (acc, cur) => {
         acc[cur.prefCode] = true;
@@ -34,7 +37,18 @@ export const PrefecturesSelectForm: React.FC<Props> = ({
       },
       {} as Record<string, boolean>,
     );
+
     setCheckedItems(allChecked);
+
+    try {
+      setIsAllSelect(true);
+      await fetchAllPopulation(prefectures);
+    } catch (error) {
+      alert(error);
+      return;
+    } finally {
+      setIsAllSelect(false);
+    }
   };
 
   const handleAllClear = () => {
@@ -46,7 +60,12 @@ export const PrefecturesSelectForm: React.FC<Props> = ({
       <div className={styles.descriptionContainer}>
         <h1>都道府県を選択してください</h1>
         <span className={styles.buttonContainer}>
-          <BasicButton colorScheme="primary" text="全て選択" onClick={() => handleAllSelect()} />
+          <BasicButton
+            colorScheme="primary"
+            isLoading={isAllSelect}
+            text="全て選択"
+            onClick={() => handleAllSelect()}
+          />
           <BasicButton colorScheme="secondary" text="クリア" onClick={() => handleAllClear()} />
         </span>
       </div>

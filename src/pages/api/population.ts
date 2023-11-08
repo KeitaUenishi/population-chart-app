@@ -14,8 +14,7 @@ const querySchema = z.object({
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const validQuery = querySchema.safeParse(req.query);
   if (!validQuery.success) {
-    res.status(400).json({ message: "Invalid query" });
-    return;
+    return res.status(400).json({ message: "Invalid query" });
   }
 
   try {
@@ -24,11 +23,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       "X-API-KEY": process.env.RESAS_API_KEY ?? "",
     });
     if (!data.result) {
-      res.status(400).json({ message: "APIリクエストエラー" });
+      return res.status(400).json({ message: "APIリクエストエラー" });
     }
 
-    res.status(200).json(data);
+    return res.status(200).json(data);
   } catch (error) {
-    res.status(500).json({ message: "予期せぬエラーが発生しました。" });
+    return res.status(500).json({ message: "予期せぬエラーが発生しました。" });
   }
 }
