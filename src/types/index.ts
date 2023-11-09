@@ -1,5 +1,5 @@
 export type Prefectures = {
-  message: string;
+  message: string | null;
   result: {
     prefCode: number;
     prefName: string;
@@ -7,7 +7,7 @@ export type Prefectures = {
 };
 
 export type Population = {
-  message: string;
+  message: string | null;
   result: {
     boundaryYear: number;
     data: {
